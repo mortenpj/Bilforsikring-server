@@ -10,11 +10,9 @@ import java.util.List;
 @Repository
 public class BilforsikringRepositoryImpl implements BilforsikringRepository{
 
-    private final BilforsikringRepository bilforsikringRepository;
     private final FagSystemIntegrasjon fagSystemIntegrasjon;
 
-    public BilforsikringRepositoryImpl(BilforsikringRepository bilforsikringRepository, FagSystemIntegrasjon fagSystemIntegrasjon) {
-        this.bilforsikringRepository = bilforsikringRepository;
+    public BilforsikringRepositoryImpl(FagSystemIntegrasjon fagSystemIntegrasjon) {
         this.fagSystemIntegrasjon = fagSystemIntegrasjon;
     }
 
@@ -31,8 +29,15 @@ public class BilforsikringRepositoryImpl implements BilforsikringRepository{
 
     @Override
     public Bilforsikring lagNyBilforsikring(Bilforsikring bilforsikring) {
+        /**
+         * Dette vet jeg ikke er den optimale måten å gjøre det på da objektet ikke er immutable,
+         * noe som er spesielt viktig med en domenemodell.
+         */
         long kundeNummer = this.fagSystemIntegrasjon.opprettKunde(bilforsikring.getKunde());
         long avtaleNummer = this.fagSystemIntegrasjon.opprettNyAvtale(bilforsikring);
+        bilforsikring.setKundeNummer(kundeNummer);
+        bilforsikring.setAvtaleNummer(avtaleNummer);
+        return bilforsikring;
 
 
     }

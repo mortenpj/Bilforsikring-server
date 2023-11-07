@@ -46,6 +46,12 @@ public class BilforsikringBusiness {
         }
         return nyBilforsikringDto;
     }
+
+    /**
+     * Disse metodene under her burde vært i ett transformer lag, slik at koden blir lettere å lese, jeg startet å lage
+     * de her og fikk ikke tid til å flytte de ut til en egen klasse og eget lag. Men det er det jeg ville ha gjort om jeg hadde hatt tid
+     */
+
     private BilforsikringDto konverterBilforsikringTilDto(Bilforsikring bilforsikring) {
         KundeDto kundeDto = this.konverterForsikringEierTilDto(bilforsikring.getKunde());
         return new BilforsikringDto(

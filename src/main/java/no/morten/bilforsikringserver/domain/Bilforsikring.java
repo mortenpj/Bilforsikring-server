@@ -19,6 +19,7 @@ public class Bilforsikring {
     private Long id;
 
     private Long kundeNummer;
+    private Long avtaleNummer;
 
     private String registreringsNummer;
 
